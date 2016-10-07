@@ -1,0 +1,40 @@
+package
+{
+	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
+	
+	public class PrimeNumber extends Sprite
+	{
+		public function PrimeNumber()
+		{
+			super();
+			
+			// support autoOrients
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
+			var y:int =0;
+			var x:int =0;
+			var prime:String =" ";
+			
+			for(y = 1; y <= 30; y++)
+			{	
+				var i:int = 0;
+				for (x = y; x >= 1; x--)
+				{	
+					if(y%x==0)
+					{
+						i = i + 1;
+					}
+				}
+				if(i == 2)
+				{
+					prime = prime + y + ", ";
+				}
+			}		
+			trace(prime);
+			
+		}
+	}
+}
