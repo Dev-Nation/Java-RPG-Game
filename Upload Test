@@ -1,0 +1,101 @@
+package rpg.game;
+
+import java.io.*;
+
+import java.net.*;
+
+import java.util.*;
+
+public class RPGGame {
+
+	static Socket socket;
+	static DataOutputStream outStream; // output stream to server
+	static DataInputStream inStream; // input stream from server
+        static boolean notConnected;
+
+        public static void ConnectClient(){
+            
+        }
+        
+	public static void main(String[] args) {
+            
+           
+            do{ 
+
+            Scanner sc1 = new Scanner(System.in);
+            Scanner sc2 = new Scanner(System.in);
+
+            
+            
+            System.out.println("Enter IP (default '127.0.0.1')");
+
+            String host = sc1.next();
+           
+            System.out.println("Enter Port (default '1234')");
+
+            int port = sc2.nextInt();
+
+		try {
+			// create socket for connection
+			socket = new Socket(InetAddress.getByName(host), port);
+
+			// get input/output streams
+			inStream = new DataInputStream(socket.getInputStream());
+			outStream = new DataOutputStream(socket.getOutputStream());
+                        System.out.println("Joined Chat");
+                        notConnected = false;
+		} catch (UnknownHostException e) {
+
+                        System.out.println("Failed to join Chat");			
+                        notConnected = true;
+                        
+		} catch (IOException e) {
+
+                        System.out.println("Failed to join Chat");
+                        notConnected = true;    
+		}
+            }while(notConnected);
+            
+            
+		chat(); // perform chatting loop
+
+		try { // close resources
+			socket.close();
+			inStream.close();
+			outStream.close();
+		} catch (IOException e) {
+			// handle exception here
+		}
+	} // main
+
+	public static void chat() {
+		Scanner sc = new Scanner(System.in);
+		
+		while (true) {
+			try {
+				String lineInput = sc.nextLine();
+
+				if (lineInput.length() > 0) { // if client types something
+					outStream.writeBytes(lineInput); // send message to server
+					outStream.write(13); // carriage return
+					outStream.write(10); // line feed
+					outStream.flush(); // flush the stream line
+
+					if (lineInput.equalsIgnoreCase("quit")) {
+						System.exit(0); // stop client chatting as well.
+					}
+
+					// print any message received from server
+					int inByte;
+					System.out.print("Server>>> ");
+					while ((inByte = inStream.read()) != '\n') {
+						System.out.write(inByte);
+					}
+					System.out.println();
+				}
+			} catch (IOException e) {
+				// handle IO exception here
+			}
+		}
+	}
+}
