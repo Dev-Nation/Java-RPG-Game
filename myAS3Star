@@ -1,0 +1,81 @@
+package
+{
+	import flash.display.*;
+
+	
+	public class StarShape extends Sprite
+	{
+		public function StarShape() {
+			
+			super();
+			
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
+			
+			var star_commands:Vector.<int> = new Vector.<int>(10, true);
+			
+			star_commands[0] = GraphicsPathCommand.MOVE_TO;
+			star_commands[1] = GraphicsPathCommand.LINE_TO;
+			star_commands[2] = GraphicsPathCommand.LINE_TO;
+			star_commands[3] = GraphicsPathCommand.LINE_TO;
+			star_commands[4] = GraphicsPathCommand.LINE_TO;
+			star_commands[5] = GraphicsPathCommand.LINE_TO;
+			star_commands[6] = GraphicsPathCommand.LINE_TO;
+			star_commands[7] = GraphicsPathCommand.LINE_TO;
+			star_commands[8] = GraphicsPathCommand.LINE_TO;
+			star_commands[9] = GraphicsPathCommand.LINE_TO;
+			
+			
+			var star_coord:Vector.<Number> = new Vector.<Number>(20, true);
+			star_coord[0] = 125; //x1
+			star_coord[1] = 0; //y1
+			
+			star_coord[2] = 155; //x2
+			star_coord[3] = 90; //y2
+			
+			star_coord[4] = 250; //x3
+			star_coord[5] = 90; //y3
+			
+			star_coord[6] = 175; //x4
+			star_coord[7] = 160; //y4
+			
+			star_coord[8] = 200; //x5
+			star_coord[9] = 250; //y5
+			
+			star_coord[10] = 125; //x6
+			star_coord[11] = 200; //y6
+			
+			star_coord[12] = 50; //x7
+			star_coord[13] = 250; //y7
+			
+			star_coord[14] = 75; //x8
+			star_coord[15] = 150; //y8
+			
+			star_coord[16] = 0; //x9
+			star_coord[17] = 90; //y9
+			
+			star_coord[18] = 90; //x10 
+			star_coord[19] = 90; //y10
+			
+			graphics.beginFill(0x003366);
+			graphics.drawPath(star_commands, star_coord);
+			
+
+			
+			/*			
+			// a shape object
+			var rectAndCircle1:Shape = new Shape();
+			// set line thickness to one pixel
+			rectAndCircle1.graphics.lineStyle(1);
+			// draw a blue rectangle
+			rectAndCircle1.graphics.beginFill(0x0000FF, 1);
+			rectAndCircle1.graphics.drawRect(25, 25, 2, 2); // x/y = 125/0 and width/height = 150/75
+			rectAndCircle1.graphics.endFill(); // end filling the shape
+			// show rectAndCircle on screen
+			this.addChild(rectAndCircle1);*/
+			
+		}
+
+	}
+}
